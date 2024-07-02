@@ -1,0 +1,28 @@
+### create brand
+POST http://localhost:8080/brands
+Content-Type: application/json
+
+{
+  "name": "Daihatsu"
+}
+
+### getAll brand
+GET http://localhost:8080/brands
+Accept: application/json
+Content-Type: application/json
+
+### getOne brand
+GET http://localhost:8080/brands/4
+Accept: application/json
+Content-Type: application/json
+
+### update brand
+PUT http://localhost:8080/brands/3
+Content-Type: application/json
+
+{
+  "name": "Honda"
+}
+
+### delete brand
+DELETE http://localhost:8080/brands/4

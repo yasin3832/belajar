@@ -1,0 +1,11 @@
+SHOW DATABASES;
+
+CREATE DATABASE car_rent;
+
+USE car_rent;
+
+SHOW TABLES;
+
+SELECT * FROM rent;
+
+DESC rent;

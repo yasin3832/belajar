@@ -1,0 +1,28 @@
+### create user
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name": "Joko"
+}
+
+### getAll user
+GET http://localhost:8080/users
+Accept: application/json
+Content-Type: application/json
+
+### getOne user
+GET http://localhost:8080/users/2
+Accept: application/json
+Content-Type: application/json
+
+### update user
+PUT http://localhost:8080/users/2
+Content-Type: application/json
+
+{
+  "name": "Nugraha"
+}
+
+### delete user
+DELETE http://localhost:8080/users/3

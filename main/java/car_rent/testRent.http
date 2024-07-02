@@ -1,0 +1,32 @@
+### create rent
+POST http://localhost:8080/rent
+Content-Type: application/json
+
+{
+  "completed": false,
+  "car_id": 2,
+  "user_id": 2
+}
+
+### getAll rent
+GET http://localhost:8080/rent
+Accept: application/json
+Content-Type: application/json
+
+### getOne rent
+GET http://localhost:8080/rent/2
+Accept: application/json
+Content-Type: application/json
+
+### update rent
+PUT http://localhost:8080/rent/2
+Content-Type: application/json
+
+{
+  "completed": true,
+  "car_id": 2,
+  "user_id": 2
+}
+
+### delete rent
+DELETE http://localhost:8080/rent/1
