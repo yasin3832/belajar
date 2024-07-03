@@ -3,9 +3,16 @@ package car_rent.service.impl;
 import car_rent.model.User;
 import car_rent.repository.UserRepository;
 import car_rent.service.UserService;
+import car_rent.utils.response.PageWrapper;
+import car_rent.utils.specification.UserSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -17,8 +24,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public Page<User> getAll(String name, Pageable pageable) {
+        Specification<User> specification = UserSpecification.getUserSpecification(name);
+        return userRepository.findAll(specification, pageable);
     }
 
     @Override

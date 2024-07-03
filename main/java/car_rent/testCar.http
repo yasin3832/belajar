@@ -13,6 +13,11 @@ GET http://localhost:8080/cars
 Accept: application/json
 Content-Type: application/json
 
+### getAll car with parameters
+GET http://localhost:8080/cars?name=io
+Accept: application/json
+Content-Type: application/json
+
 ### getOne car
 GET http://localhost:8080/cars/2
 Accept: application/json

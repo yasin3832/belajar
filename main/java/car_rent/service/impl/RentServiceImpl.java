@@ -7,7 +7,6 @@ import car_rent.repository.RentRepository;
 import car_rent.service.CarService;
 import car_rent.service.RentService;
 import car_rent.service.UserService;
-import car_rent.utils.SearchCarRequest;
 import car_rent.utils.dto.RentRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

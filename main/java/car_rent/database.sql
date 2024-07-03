@@ -6,6 +6,6 @@ USE car_rent;
 
 SHOW TABLES;
 
-SELECT * FROM rent;
+SELECT * FROM cars;
 
-DESC rent;
+DESC users;

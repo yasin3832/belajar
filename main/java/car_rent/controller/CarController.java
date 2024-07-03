@@ -2,8 +2,14 @@ package car_rent.controller;
 
 import car_rent.model.Car;
 import car_rent.service.CarService;
-import car_rent.utils.SearchCarRequest;
 import car_rent.utils.dto.CarRequestDTO;
+import car_rent.utils.response.PageWrapper;
+import car_rent.utils.response.Res;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,10 +29,18 @@ public class CarController {
     }
 
     @GetMapping
-    public List<Car> getAll(@RequestParam(required = false) Integer id){
-        SearchCarRequest request = new SearchCarRequest();
-        request.setId(id);
-        return carService.getAll(request);
+    public ResponseEntity<?> getAll(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Boolean available,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ){
+        Page<Car> res = carService.getAll(name, available, pageable);
+        PageWrapper<Car> result = new PageWrapper<>(res);
+        return Res.rendeerJson(
+                result,
+                "FOUND",
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/{id}")

@@ -2,6 +2,13 @@ package car_rent.controller;
 
 import car_rent.model.User;
 import car_rent.service.UserService;
+import car_rent.utils.response.PageWrapper;
+import car_rent.utils.response.Res;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +28,17 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAll(){
-        return userService.getAll();
+    public ResponseEntity<?> getAll(
+            @RequestParam(required = false) String name,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ){
+        Page<User> res = userService.getAll(name, pageable);
+        PageWrapper<User> result = new PageWrapper<>(res);
+        return Res.rendeerJson(
+                result,
+                "FOUND",
+                HttpStatus.OK
+        );
     }
 
     @GetMapping("/{id}")

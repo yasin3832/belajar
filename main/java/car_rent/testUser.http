@@ -11,6 +11,11 @@ GET http://localhost:8080/users
 Accept: application/json
 Content-Type: application/json
 
+### getAll user with parameters
+GET http://localhost:8080/users?name=ko
+Accept: application/json
+Content-Type: application/json
+
 ### getOne user
 GET http://localhost:8080/users/2
 Accept: application/json

@@ -5,17 +5,15 @@ import car_rent.model.Car;
 import car_rent.repository.CarRepository;
 import car_rent.service.BrandService;
 import car_rent.service.CarService;
-import car_rent.utils.SearchCarRequest;
 import car_rent.utils.dto.CarRequestDTO;
-import jakarta.persistence.criteria.Predicate;
+import car_rent.utils.specification.CarSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -24,9 +22,9 @@ public class CarServiceImpl implements CarService {
     private final BrandService brandService;
 
     @Override
-    public List<Car> getAll(SearchCarRequest request) {
-        Specification<Car> specification = getCarSpecification(request);
-        return carRepository.findAll(specification);
+    public Page<Car> getAll(String name, Boolean available, Pageable pageable) {
+        Specification<Car> specification = CarSpecification.getCarSpecification(name, available);
+        return carRepository.findAll(specification, pageable);
     }
 
     @Override
@@ -57,19 +55,5 @@ public class CarServiceImpl implements CarService {
     @Override
     public void delete(Integer id) {
         carRepository.deleteById(id);
-    }
-
-    private Specification<Car> getCarSpecification(SearchCarRequest request){
-        return (root, query, criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
-            if (request.getId() != null){
-                Predicate idPredicate = criteriaBuilder.equal(
-                        root.get("id"),
-                        request.getId()
-                );
-                predicates.add(idPredicate);
-            }
-            return query.where(predicates.toArray(new Predicate[]{})).getRestriction();
-        };
     }
 }
